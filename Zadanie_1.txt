@@ -1,0 +1,87 @@
+// define inputs and outputs
+#define DIstart 9
+#define DIleft 10
+#define DIright 11
+#define DOenable 6
+#define DOright 7
+#define DOleft 8
+
+int Counter = 0;
+
+volatile int State;
+void setup()
+
+{ 
+  pinMode(DIstart, INPUT);
+  pinMode(DIleft, INPUT);
+  pinMode(DIright, INPUT);
+  
+  pinMode(DOenable, OUTPUT); 
+  pinMode(DOright, OUTPUT); 
+  pinMode(DOleft, OUTPUT);
+  State = 1;
+
+} 
+ 
+void loop()  {   
+  
+  if (digitalRead(DIstart)== LOW){ // if no signal on start buton detected go to idle state
+   State = 1; 
+  }
+  
+switch(State) {
+  
+    case 1:  // idle state - wait for start
+  
+  		if (digitalRead(DIstart)== HIGH){ // Start button pressed
+    		Counter = Counter +1;
+    	  	State = 2;
+    		Serial.begin(9600);
+    		Serial.println(Counter);
+		}
+        else{
+    		digitalWrite(DOright,LOW);
+    		digitalWrite(DOleft,LOW);
+  			digitalWrite(DOenable,LOW);
+        }
+  
+    break;
+  
+    case 2: // choose state
+  
+  		if (digitalRead(DIleft)== HIGH){
+		State = 3;
+ 		}
+  	
+  		if (digitalRead(DIright)== HIGH){
+		State = 4;
+ 		}
+ 
+    break;
+    
+    case 3: // right direction
+  
+ 		digitalWrite(DOenable,HIGH);
+    	digitalWrite(DOright,LOW);
+    	digitalWrite(DOleft,HIGH);
+  
+  		
+  		if (digitalRead(DIright)){ // change of direction
+        	State = 4;
+        }
+    
+    break;
+  
+  	case 4: // left direction
+  
+        digitalWrite(DOenable,HIGH);
+  		digitalWrite(DOright,HIGH);
+    	digitalWrite(DOleft,LOW);
+  
+  		if (digitalRead(DIleft)){ // change of direction
+        	State = 3;
+        }
+  	break;
+    
+}
+}
