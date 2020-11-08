@@ -1,113 +1,192 @@
-float liczba1 = 0.0, liczba2 = 0.0, wynik = 0.0;  //zadeklarowanie zmiennych
-int opcja = 0;
+int a;
+int b;
+float a1;
+float b1;
+int wynik;
+float wynik1;
+String zmienna1;
+String zmienna2;
+String dzialanie1;
+int dzialanie2;
 
-void setup() 
-{
-	Serial.begin(9600);
+void setup(){
+  Serial.begin(9600);
+  Serial.println("Wybierz dzialanie");
+  Serial.println("1 - Dodawanie");
+  Serial.println("2 - Odejmowanie");
+  Serial.println("3 - Mnozenie");
+  Serial.println("4 - Dzielenie");
+  Serial.println("5 - Zakonczenie programu");
 }
 
-void loop()				//wyswietlenie informacji na temat operacji
+void loop(){
+
+
+if(Serial.available() > 0){
+String dzialanie1 = Serial.readStringUntil('\n');
+dzialanie2=dzialanie1.toInt();
+
+switch(dzialanie2)
 {
-	Serial.println("Kalkulator prosty do liczb dwucyfrowych");
-	Serial.println("1 - dodawanie"); 
-	Serial.println("2 - odejmowanie"); 
-	Serial.println("3 - mnozenie"); 
-	Serial.println("4 - dzielenie");
-	Serial.println("wybierz liczbe odpowiadajaca dzialaniu, ktore chcesz wykonac");
-	while(Serial.available() == 0)		//oczekiwanie na wybor operacji
-	{
-	}
-	opcja=Serial.parseInt();
-	Serial.println(opcja);
-	if(opcja<1 || opcja>4)	//sprawdzenie czy dobrze wprowadzono liczbe odpowiadajaca dzialaniu
-	{
-		Serial.println("Wybrano zly numer, sprobuj jeszcze raz");
-	}
-	Serial.println("Podaj pierwsza liczbe: ");
-	while(Serial.available == 0);		//oczekiwanie na wprowadzenie 1 liczby
-	liczba1 = Serial.parseFloat();
-	Serial.println(liczba1);
-	
-	Serial.println("Podaj druga liczbe: ");
-	while(Serial.available == 0); 		//oczekiwanie na wprowadzenie 2 liczby
-	liczba2 = Serial.parseFloat();		
-	Serial.println(liczba2);
+case 1:
 
-	switch(opcja)
-	{
-		case 1:							//dodawanie
-		if(abs(liczba1)<100 || abs(liczba2)<100)		//sprawdzenie czy wprowadzono liczbe dwucyfrowa
-		{
-			wynik=liczba1+liczba2;
-			Serial.println("Dzialanie");
-			Serial.println(liczba1);
-			Serial.println("+");
-			Serial.println(liczba2);
-			Serial.println("=");
-			Serial.println(wynik);
-		}
-		else
-		{
-			Serial.println("Nie podano liczby dwucyfrowej!");
-		}
-		break;
+  Serial.println("Wybrano opcje: dodawanie"); 
+  Serial.println("Wpisz pierwsza liczbe:\n");
+  while(!Serial.available());      
+    zmienna1 = Serial.readStringUntil('\n'); 
 
-		
-		case 2:							//odejmowanie
-		if(abs(liczba1)<100 || abs(liczba2)<100)
-		{
-			wynik=liczba1-liczba2;
-			Serial.println("Dzialanie");
-			Serial.println(liczba1);
-			Serial.println("-");
-			Serial.println(liczba2);
-			Serial.println("=");
-			Serial.println(wynik);
-		}
-		else
-		{
-			Serial.println("Nie podano liczby dwucyfrowej!");
-		}
-		break;
+    a=zmienna1.toInt();
+   
+  Serial.println("Wpisz druga liczbe:\n");
+  while(!Serial.available());       
+    zmienna2 = Serial.readStringUntil('\n'); 
+ 
+    b=zmienna2.toInt();    
+ 
+if(abs(a)<100 && abs(b)<100)
+{
+  wynik=a+b;
 
+      Serial.println("Dzialanie");
+            Serial.println(a);
+            Serial.println("+");
+            Serial.println(b);
+            Serial.println("=");
+            Serial.println(wynik);
+}
+else
+{
+   Serial.println("Nie podano liczby dwucyfrowej!");
+}
+  break;
 
-		case 3:							//mnozenie
-		if(abs(liczba1)<100 || abs(liczba2)<100)		//sprawdzenie czy wpisane sa liczby dwucyfrowe
-		{
-			wynik=liczba1*liczba2;
-			Serial.println("Dzialanie");
-			Serial.println(liczba1);
-			Serial.println("*");
-			Serial.println(liczba2);
-			Serial.println("=");
-			Serial.println(wynik);
-		}
-		else
-		{
-			Serial.println("Nie podano liczby dwucyfrowej!");
-		}
-		break;
+case 2:
 
+  Serial.println("Wybrano opcje: odejmowanie"); 
+  Serial.println("Wpisz pierwsza liczbe:\n");
+  while(!Serial.available());       
+    zmienna1 = Serial.readStringUntil('\n'); 
+  
 
-		case 4:							//dzielenie
-		if(liczba2 == 0)					//sprawdzenie czy nie dzielimy przez 0
-		{
-			Serial.println("Musisz powtorzyc wiedze z podstawowki :)");	
-		}
-		else if(abs(liczba1)<100 || abs(liczba2)<100)
-		{
-			wynik=liczba1/liczba2;
-			Serial.println("Dzialanie:");
-			Serial.println(liczba1);
-			Serial.println("/");
-			Serial.println(liczba2);
-			Serial.println("=");
-			Serial.println(wynik);
-		}
-		 else
-		{
-			Serial.println("Nie podano liczby dwucyfrowej");
-		}
-		break;
-	}
-}	
+    a=zmienna1.toInt();
+   
+  Serial.println("Wpisz druga liczbe:\n");
+  while(!Serial.available());     
+    zmienna2 = Serial.readStringUntil('\n'); 
+
+    b=zmienna2.toInt();
+    
+if(abs(a)<100 && abs(b)<100)
+{ 
+
+  wynik=a-b;
+
+      Serial.println("Dzialanie");
+            Serial.println(a);
+            Serial.println("-");
+            Serial.println(b);
+            Serial.println("=");
+            Serial.println(wynik);
+
+}
+else
+{
+   Serial.println("Nie podano liczby dwucyfrowej!");
+}
+
+  break;
+
+case 3:
+
+  Serial.println("Wybrano opcje: mnozenie"); 
+  Serial.println("Wpisz pierwsza liczbe:\n");
+  while(!Serial.available());      
+    zmienna1 = Serial.readStringUntil('\n'); 
+  
+
+    a=zmienna1.toInt();
+   
+  Serial.println("Wpisz druga liczbe:\n");
+  while(!Serial.available());       
+    zmienna2 = Serial.readStringUntil('\n'); 
+
+    b=zmienna2.toInt();
+
+if(abs(a)<100 && abs(b)<100)
+{
+ 
+
+wynik=a*b;
+
+      Serial.println("Dzialanie");
+            Serial.println(a);
+            Serial.println("*");
+            Serial.println(b);
+            Serial.println("=");
+            Serial.println(wynik);
+}
+else
+{
+   Serial.println("Nie podano liczby dwucyfrowej!");
+}
+
+  break;
+
+case 4:
+
+  Serial.println("Wybrano opcje: dzielenie"); 
+  Serial.println("Wpisz pierwsza liczbe:\n");
+  while(!Serial.available());    
+    zmienna1 = Serial.readStringUntil('\n'); 
+  
+
+    a=zmienna1.toInt();
+    a1=a;
+
+   
+  Serial.println("Wpisz druga liczbe:\n");
+  while(!Serial.available());       
+    zmienna2 = Serial.readStringUntil('\n'); 
+
+    b=zmienna2.toInt();
+    b1=b;
+
+    if(b == 0)
+   {
+      Serial.println("ZAKAZ DZIELENIA PRZEZ ZERO\n");
+   }
+
+    else if(abs(a)<100 && abs(b)<100)
+        {
+
+wynik1=a1/b1;
+
+      Serial.println("Dzialanie");
+            Serial.println(a1);
+            Serial.println("/");
+            Serial.println(b1);
+            Serial.println("=");
+            Serial.println(wynik1);
+        }
+         else
+        {
+            Serial.println("Nie podano liczby dwucyfrowej");
+        }
+
+  break;
+
+case 5:
+Serial.println("Koniec\n");
+delay(200);
+ exit(0);
+}
+  
+  Serial.println("Wybierz kolejne dzialanie");
+  Serial.println("1 - Dodawanie");
+  Serial.println("2 - Odejmowanie");
+  Serial.println("3 - Mnozenie");
+  Serial.println("4 - Dzielenie");
+  Serial.println("5 - Zakonczenie programu");
+}
+}
+
