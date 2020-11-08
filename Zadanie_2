@@ -1,0 +1,113 @@
+float liczba1 = 0.0, liczba2 = 0.0, wynik = 0.0;  // zadeklarowanie zmiennych
+int opcja = 0;
+
+void setup() 
+{
+	Serial.begin(9600);
+}
+
+void loop()
+{
+	Serial.println("Kalkulator prosty do liczb dwucyfrowych");
+	Serial.println("1 - dodawanie"); 
+	Serial.println("2 - odejmowanie"); 
+	Serial.println("3 - mnozenie"); 
+	Serial.println("4 - dzielenie");
+	Serial.println("wybierz liczbe odpowiadajaca dzialaniu, ktore chcesz wykonac");
+	while(Serial.available() == 0)
+	{
+	}
+	opcja=Serial.parseInt();
+	Serial.println(opcja);
+	if(opcja<1 || opcja>4)
+	{
+		Serial.println("Wybrano zly numer, sprobuj jeszcze raz");
+	}
+	Serial.println("Podaj pierwsza liczbe: ");
+	while(Serial.available == 0);
+	liczba1 = Serial.parseFloat();
+	Serial.println(liczba1);
+	
+	Serial.println("Podaj druga liczbe: ");
+	while(Serial.available == 0);
+	liczba2 = Serial.parseFloat();
+	Serial.println(liczba2);
+
+	switch(opcja)
+	{
+		case 1:
+		if(abs(liczba1)<100 || abs(liczba2)<100)
+		{
+			wynik=liczba1+liczba2;
+			Serial.println("Dzialanie");
+			Serial.println(liczba1);
+			Serial.println("+");
+			Serial.println(liczba2);
+			Serial.println("=");
+			Serial.println(wynik);
+		}
+		else
+		{
+			Serial.println("Nie podano liczby dwucyfrowej!");
+		}
+		break;
+
+		
+		case 2:
+		if(abs(liczba1)<100 || abs(liczba2)<100)
+		{
+			wynik=liczba1-liczba2;
+			Serial.println("Dzialanie");
+			Serial.println(liczba1);
+			Serial.println("-");
+			Serial.println(liczba2);
+			Serial.println("=");
+			Serial.println(wynik);
+		}
+		else
+		{
+			Serial.println("Nie podano liczby dwucyfrowej!");
+		}
+		break;
+
+
+		case 3:
+		if(abs(liczba1)<100 || abs(liczba2)<100)
+		{
+			wynik=liczba1*liczba2;
+			Serial.println("Dzialanie");
+			Serial.println(liczba1);
+			Serial.println("*");
+			Serial.println(liczba2);
+			Serial.println("=");
+			Serial.println(wynik);
+		}
+		else
+		{
+			Serial.println("Nie podano liczby dwucyfrowej!");
+		}
+		break;
+
+
+		case 4:
+		if(liczba2 == 0)
+		{
+			Serial.println("Musisz powtorzyc wiedze z podstawowki :)");
+		}
+		else if(abs(liczba1)<100 || abs(liczba2)<100)
+		{
+			wynik=liczba1/liczba2;
+			Serial.println("Dzialanie:");
+			Serial.println(liczba1);
+			Serial.println("/");
+			Serial.println(liczba2);
+			Serial.println("=");
+			Serial.println(wynik);
+		}
+		 else
+		{
+			Serial.println("Nie podano liczby dwucyfrowej");
+		}
+		break;
+	}
+}	
