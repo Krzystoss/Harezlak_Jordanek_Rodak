@@ -90,9 +90,9 @@ void loop()				//wyswietlenie informacji na temat operacji
 
 
 		case 4:							//dzielenie
-		if(liczba2 == 0)
+		if(liczba2 == 0)					//sprawdzenie czy nie dzielimy przez 0
 		{
-			Serial.println("Musisz powtorzyc wiedze z podstawowki :)");	//sprawdzenie czy nie dzielimy przez 0
+			Serial.println("Musisz powtorzyc wiedze z podstawowki :)");	
 		}
 		else if(abs(liczba1)<100 || abs(liczba2)<100)
 		{
